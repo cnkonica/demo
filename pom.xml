@@ -11,6 +11,7 @@
     <modules>
         <module>demo-example</module>
         <module>demo-eureka</module>
+        <module>demo-gateway</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

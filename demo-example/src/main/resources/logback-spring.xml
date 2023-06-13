@@ -10,7 +10,7 @@
     <!--定义日志输出目录-->
     <conversionRule conversionWord="traceId" converterClass="com.cnkonica.demo.example.common.trace.TraceIdLogConverter"/>
     <property name="LOG_HOME" value="/apps/logs/demo-example"/>
-    <property name="SYSTEM" value="example"/>
+    <property name="SYSTEM" value="demo-example"/>
 
     <!-- 控制台输出的日志格式 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -33,8 +33,7 @@
         </encoder>
     </appender>
     <logger name="com.cnkonica.demo.example" level="debug" />
-
-
+    <logger name="com.cnkonica.demo.example.mapper" level="trace" />
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>

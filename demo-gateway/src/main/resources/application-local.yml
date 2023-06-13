@@ -1,0 +1,8 @@
+eureka:
+  instance:
+    instance-id: demo-gateway-service
+  client: #服务提供者provider注册进eureka服务列表内
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://localhost:8090/eureka
