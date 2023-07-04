@@ -9,7 +9,7 @@
 <configuration scan="true" scanPeriod="10 seconds" debug="false">
     <!--定义日志输出目录-->
     <conversionRule conversionWord="traceId" converterClass="com.cnkonica.demo.example.common.trace.TraceIdLogConverter"/>
-    <property name="LOG_HOME" value="/apps/logs/demo-example"/>
+    <property name="LOG_HOME" value="log"/>
     <property name="SYSTEM" value="demo-example"/>
 
     <!-- 控制台输出的日志格式 -->
