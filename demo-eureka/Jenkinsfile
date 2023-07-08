@@ -56,7 +56,7 @@ pipeline {
                     cp ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
                     cp ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
                     echo "VERSION_ID: ${VERSION_ID}"
-                    old_image_id=\$(docker images | grep ${artifactId} | grep ${VERSION_ID} | awk \'{print \$3}\')
+                    old_image_id=\$(docker images | grep ${artifactId} | grep ${VERSION_ID} | awk ''{print \$3}'')
                     echo "old_image_id: \${old_image_id}"
                     if [[ -n "\${old_image_id}" ]]; then
                         docker rmi -f \${old_image_id}
@@ -64,19 +64,19 @@ pipeline {
 
                     docker build -f ${dockPath}Dockerfile -t ${artifactId}:${VERSION_ID} ${dockPath}
 
-                    container_id=\$(docker ps | grep ${artifactId}:${VERSION_ID} | awk \'{print \$1}\')
+                    container_id=\$(docker ps | grep ${artifactId}:${VERSION_ID} | awk ''{print \$1}'')
                     if [[ -n "\${container_id}" ]]; then
                         docker rm -f "\${container_id}"
                     fi
 
-                    old_pid=\$(ps -ef | grep ${appName}.jar | grep -v grep | awk \'{print \$2}\')
+                    old_pid=\$(ps -ef | grep ${appName}.jar | grep -v grep | awk ''{print \$2}'')
                     if [[ -n "\${old_pid}" ]]; then
                         kill -9 \${old_pid}
                     fi
 
                     old_image=\$(docker images | grep ${artifactId} | grep ${VERSION_ID})
                     if [[ -n "\${old_image}" ]]; then
-                        old_image_id=\$(echo \${old_image} | awk \'{print \$3}\')
+                        old_image_id=\$(echo \${old_image} | awk ''{print \$3}'')
                         docker rmi -f \${old_image_id}
                     fi
 
