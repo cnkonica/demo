@@ -46,6 +46,7 @@ pipeline {
                     def remoteServer = '120.77.58.15'
                     def remoteUser = 'konyliu'
                     def dockPath="/home/konyliu/docker/"
+                    def VERSION_ID="1.0.0"
                     // 使用SSH Agent插件执行SSH操作
                     sshagent(['konyliu-aliyun15']) {
                         // 执行多个命令在同一个SSH会话中
