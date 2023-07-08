@@ -40,53 +40,54 @@ pipeline {
             steps {
                 script {
                     // 定义SSH连接的相关参数
-                    def jenkinsPath = '/var/lib/jenkins/workspace'
-                    def appName = 'eurekaApp8090'
-                    def artifactId = 'demo-eureka'
+                    def jenkinsPath='/var/lib/jenkins/workspace'
+                    def appName='eurekaApp8090'
+                    def artifactId='demo-eureka'
                     def remoteServer = '120.77.58.15'
                     def remoteUser = 'konyliu'
-                    def dockPath = "/home/konyliu/docker/"
-                    def VERSION_ID = "1.0.0"
+                    def dockPath="/home/konyliu/docker/"
+                    def VERSION_ID="1.0.0"
 
                     // 使用SSH Agent插件执行SSH操作
                     sshagent(['konyliu-aliyun15']) {
                         // 执行多个命令在同一个SSH会话中
                         sh """
-                        ssh ${remoteUser}@${remoteServer} '
-                        cp ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
-                        cp ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
-                        echo "VERSION_ID: ${VERSION_ID}"
-                        old_image_id=\$(docker images | grep ${artifactId} | grep ${VERSION_ID} | awk '{print \$3}')
-                        echo "old_image_id: ${old_image_id}"
-                        if [[ -n "${old_image_id}" ]]; then
-                            docker rmi -f ${old_image_id}
-                        fi
-    
-                        docker build -f ${dockPath}Dockerfile -t ${artifactId}:${VERSION_ID} ${dockPath}
-    
-                        container_id=\$(docker ps | grep ${artifactId}:${VERSION_ID} | awk '{print \$1}')
-                        if [[ -n "${container_id}" ]]; then
-                            docker rm -f "\${container_id}"
-                        fi
-    
-                        old_pid=\$(ps -ef | grep ${appName}.jar | grep -v grep | awk '{print \$2}')
-                        if [[ -n "\$old_pid" ]]; then
-                            kill -9 \$old_pid
-                        fi
-    
-                        old_image=\$(docker images | grep ${artifactId} | grep ${VERSION_ID})
-                        if [[ -n "\$old_image" ]]; then
-                            old_image_id=\$(echo \${old_image} | awk '{print \$3}')
-                            docker rmi -f \${old_image_id}
-                        fi
-    
-                        docker run --name ${artifactId} -e "PROFILE=-Dspring.profiles.active=prod" -e "JAVA_OPTS=-Xms128m -Xmx256m" -v /etc/localtime:/etc/localtime -p 8090:8090 -d ${artifactId}:${VERSION_ID}
-                        '
-                        """
+                    ssh ${remoteUser}@${remoteServer} '
+                    cp ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
+                    cp ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
+                    echo "VERSION_ID: ${VERSION_ID}"
+                    old_image_id=\$(docker images | grep ${artifactId} | grep ${VERSION_ID} | awk \'{print \$3}\')
+                    echo "old_image_id: \${old_image_id}"
+                    if [[ -n "\${old_image_id}" ]]; then
+                        docker rmi -f \${old_image_id}
+                    fi
+
+                    docker build -f ${dockPath}Dockerfile -t ${artifactId}:${VERSION_ID} ${dockPath}
+
+                    container_id=\$(docker ps | grep ${artifactId}:${VERSION_ID} | awk \'{print \$1}\')
+                    if [[ -n "\${container_id}" ]]; then
+                        docker rm -f "\${container_id}"
+                    fi
+
+                    old_pid=\$(ps -ef | grep ${appName}.jar | grep -v grep | awk \'{print \$2}\')
+                    if [[ -n "\${old_pid}" ]]; then
+                        kill -9 \${old_pid}
+                    fi
+
+                    old_image=\$(docker images | grep ${artifactId} | grep ${VERSION_ID})
+                    if [[ -n "\${old_image}" ]]; then
+                        old_image_id=\$(echo \${old_image} | awk \'{print \$3}\')
+                        docker rmi -f \${old_image_id}
+                    fi
+
+                    docker run --name ${artifactId} -e "PROFILE=-Dspring.profiles.active=prod" -e "JAVA_OPTS=-Xms128m -Xmx256m" -v /etc/localtime:/etc/localtime -p 8090:8090 -d ${artifactId}:${VERSION_ID}
+                '
+                """
                         echo '运行成功'
                     }
                 }
             }
         }
+
     }
 }
