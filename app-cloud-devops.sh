@@ -88,7 +88,8 @@ function start()
 function stop()
 {
     echo "stop $appName..."
-    count=$(getCount)
+    count=`getCount`
+    echo "count: $count"
     if [ $count != 0 ];then
         pid=$(getPid)
         echo "stop $appName kill pid $pid"
