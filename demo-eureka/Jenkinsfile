@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    stages {
+        stage('拉取代码') {
+            steps {
+                git credentialsId: 'eadd004e-5cff-4ccd-8745-20a3d263fb5f', url: 'https://gitee.com/wudikaka/demo.git'
+                echo '拉取成功'
+            }
+        }
+        stage('执行构建') {
+            steps {
+                // 如果maven可以运行，那么执行以下代码，这里需要注意一下，pom.xml文件是否在你创建的任务目录下
+                sh "mvn clean package -U -pl demo-eureka -am -Dmaven.test.skip=true"
+                echo '构建完成'
+            }
+        }
+        stage('Remote Commands') {
+            steps {
+                script {
+                    // 定义SSH连接的相关参数
+                    def remoteServer = '120.77.58.15'
+                    def remoteUser = 'konyliu'
+                    // 使用SSH Agent插件执行SSH操作
+                    sshagent(['konyliu-aliyun15']) {
+                        // 执行多个命令在同一个SSH会话中
+                        sh """
+                            ssh ${remoteUser}@${remoteServer} '
+                            sh /home/konyliu/application/demo-eureka/demo-eureka.sh restart                                
+                            '
+                        """
+                    }
+                }
+            }
+        }
+
+
+        stage('把jar包构建为docker镜像并运行') {
+            steps {
+                echo '运行成功'
+            }
+        }
+    }
+}
