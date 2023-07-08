@@ -56,7 +56,7 @@ pipeline {
                             cp ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
                             echo "VERSION_ID:" ${VERSION_ID}
                             ole_image_id=`docker images|grep ${artifactId}|grep ${VERSION_ID}|awk '{print \$3}'`
-                            echo "ole_image_id:" :${ole_image_id}
+                            echo "ole_image_id:" ${ole_image_id}
                             if [[ -n "${ole_image_id}" ]]; then
                                 docker rmi -f ${ole_image_id}
                             fi
