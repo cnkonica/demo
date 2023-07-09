@@ -41,11 +41,11 @@ pipeline {
                 script {
                     // 定义SSH连接的相关参数
                     def jenkinsPath='/var/lib/jenkins/workspace'
+                    def dockPath="/home/konyliu/docker/demo-eureka"
                     def appName='eurekaApp8090'
                     def artifactId='demo-eureka'
                     def remoteServer = '120.77.58.15'
                     def remoteUser = 'konyliu'
-                    def dockPath="/home/konyliu/docker/"
                     def VERSION_ID="1.0.0"
 
                     // 使用SSH Agent插件执行SSH操作
@@ -53,8 +53,8 @@ pipeline {
                         // 执行多个命令在同一个SSH会话中
                         sh """
                     ssh ${remoteUser}@${remoteServer} '
-                    cp ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
-                    cp ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
+                    cp -r ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
+                    cp -r ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
                     echo "VERSION_ID: ${VERSION_ID}"
                     old_image_id=\$(docker images | grep ${artifactId} | grep ${VERSION_ID} | awk "{print \\\$3}")
                     echo "old_image_id: \${old_image_id}"
@@ -62,7 +62,7 @@ pipeline {
                         docker rmi -f \${old_image_id}
                     fi
 
-                    docker build -f ${dockPath}Dockerfile -t ${artifactId}:${VERSION_ID} ${dockPath}
+                    docker build -f ${dockPath}Dockerfile -t ${artifactId}:${VERSION_ID} .
 
                     container_id=\$(docker ps -aq --filter "name=${artifactId}" --filter "status=running")
                     if [[ -n "\${container_id}" ]]; then
@@ -81,7 +81,7 @@ pipeline {
                         docker rmi -f \${old_image_id}
                     fi
 
-                    docker run --name ${artifactId} -e "PROFILE=-Dspring.profiles.active=prod" -e "JAVA_OPTS=-Xms128m -Xmx256m" -v /etc/localtime:/etc/localtime -p 8090:8090 -d ${artifactId}:${VERSION_ID}
+                    docker run --name ${artifactId} -e "PROFILE=-Dspring.profiles.active=prod" -e "JAVA_OPTS=-Xms128m -Xmx256m" -v /home/konyliu/docker/demo-eureka/log:/log -v /etc/localtime:/etc/localtime -p 8090:8090 -d ${artifactId}:${VERSION_ID}
                 '
                 """
                         echo '运行成功'
