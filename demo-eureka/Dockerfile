@@ -1,5 +1,5 @@
 # 该镜像需要依赖的基础镜像
-FROM adoptopenjdk:11-jdk-hotspotgi
+FROM adoptopenjdk/openjdk11
 # 指定维护者的名字
 MAINTAINER kony
 # 将本地文件夹挂载到当前容器
