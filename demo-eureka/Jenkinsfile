@@ -63,7 +63,7 @@ pipeline {
                         docker rmi -f \${old_image_id}
                     fi
 
-                    docker build -f ${dockPath}/Dockerfile -t ${artifactId}:${VERSION_ID} .
+                    docker build -f ${dockPath}/Dockerfile -t ${artifactId}:${VERSION_ID} ${dockPath}
 
                     container_id=\$(docker ps -aq --filter "name=${artifactId}" --filter "status=running")
                     if [[ -n "\${container_id}" ]]; then
