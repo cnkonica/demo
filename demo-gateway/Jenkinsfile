@@ -14,7 +14,7 @@ pipeline {
         stage('执行构建') {
             steps {
                 // 如果maven可以运行，那么执行以下代码，这里需要注意一下，pom.xml文件是否在你创建的任务目录下
-                sh "mvn clean package -U -pl demo-eureka -am -Dmaven.test.skip=true"
+                sh "mvn clean package -U -pl demo-gateway -am -Dmaven.test.skip=true"
                 echo '构建完成'
             }
         }
@@ -41,9 +41,9 @@ pipeline {
                 script {
                     // 定义SSH连接的相关参数
                     def jenkinsPath='/var/lib/jenkins/workspace'
-                    def dockPath="/home/konyliu/docker/demo-eureka"
-                    def appName='eurekaApp8090'
-                    def artifactId='demo-eureka'
+                    def dockPath="/home/konyliu/docker/demo-gateway"
+                    def appName='gateway8091'
+                    def artifactId='demo-gateway'
                     def remoteServer = '120.77.58.15'
                     def remoteUser = 'konyliu'
                     def VERSION_ID="1.0.0"
