@@ -82,7 +82,7 @@ pipeline {
                         docker rmi -f \${old_image_id}
                     fi
 
-                    docker run --name ${artifactId} -e "PROFILE=-Dspring.profiles.active=prod" -e "JAVA_OPTS=-Xms128m -Xmx256m" -v /home/konyliu/docker/demo-eureka/log:/log -v /etc/localtime:/etc/localtime -p 8090:8090 -d ${artifactId}:${VERSION_ID}
+                    
                 '
                 """
                         echo '运行成功'
