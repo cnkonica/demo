@@ -76,13 +76,7 @@ pipeline {
                         kill -9 \${old_pid}
                     fi
 
-                    old_image=\$(docker images | grep ${artifactId} | grep ${VERSION_ID})
-                    if [[ -n "\${old_image}" ]]; then
-                        old_image_id=\$(echo \${old_image} | awk "{print \\\$3}")
-                        docker rmi -f \${old_image_id}
-                    fi
-
-                    
+                    docker run --name ${artifactId} -e "PROFILE=-Dspring.profiles.active=prod" -e "JAVA_OPTS=-Xms128m -Xmx256m" -v /home/konyliu/docker/demo-eureka/log:/log -v /etc/localtime:/etc/localtime -p 8090:8090 -d ${artifactId}:${VERSION_ID}
                 '
                 """
                         echo '运行成功'
