@@ -53,6 +53,7 @@ pipeline {
                         // 执行多个命令在同一个SSH会话中
                         sh """
                     ssh ${remoteUser}@${remoteServer} '
+                    mkdir -r ${dockPath}
                     cp -r ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
                     cp -r ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
                     echo "VERSION_ID: ${VERSION_ID}"
@@ -62,7 +63,7 @@ pipeline {
                         docker rmi -f \${old_image_id}
                     fi
 
-                    docker build -f ${dockPath}Dockerfile -t ${artifactId}:${VERSION_ID} .
+                    docker build -f ${dockPath}/Dockerfile -t ${artifactId}:${VERSION_ID} .
 
                     container_id=\$(docker ps -aq --filter "name=${artifactId}" --filter "status=running")
                     if [[ -n "\${container_id}" ]]; then
