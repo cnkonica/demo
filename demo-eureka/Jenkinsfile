@@ -53,9 +53,9 @@ pipeline {
                         // 执行多个命令在同一个SSH会话中
                         sh """
                     ssh ${remoteUser}@${remoteServer} '
-                    mkdir -r ${dockPath}
-                    cp -r ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
-                    cp -r ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
+                    mkdir -p ${dockPath}
+                    cp ${jenkinsPath}/${artifactId}/${artifactId}/target/${appName}*.jar ${dockPath}
+                    cp ${jenkinsPath}/${artifactId}/${artifactId}/Dockerfile ${dockPath}
                     echo "VERSION_ID: ${VERSION_ID}"
                     old_image_id=\$(docker images | grep ${artifactId} | grep ${VERSION_ID} | awk "{print \\\$3}")
                     echo "old_image_id: \${old_image_id}"
