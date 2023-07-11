@@ -61,6 +61,7 @@ pipeline {
                     echo "old_image_id: \${old_image_id}"
                     if [[ -n "\${old_image_id}" ]]; then
                         docker rmi -f \${old_image_id}
+                        docker image prune
                     fi
 
                     docker build -f ${dockPath}/Dockerfile -t ${artifactId}:${VERSION_ID} ${dockPath}
@@ -75,7 +76,7 @@ pipeline {
                     if [[ -n "\${old_pid}" ]]; then
                         kill -9 \${old_pid}
                     fi
-
+                    docker image prune
                     docker run --name ${artifactId} -e "PROFILE=-Dspring.profiles.active=prod" -e "JAVA_OPTS=-Xms128m -Xmx256m" -v ${dockPath}/log:/log -v /etc/localtime:/etc/localtime -p 8090:8090 -d ${artifactId}:${VERSION_ID}
                 '
                 """
