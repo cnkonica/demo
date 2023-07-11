@@ -68,8 +68,8 @@ pipeline {
                     image_id=\$(docker images | grep ${artifactId} | grep ${VERSION_ID} | awk "{print \\\$3}")
 
                     docker login --username=xiaoyuma --password=Alizaq12wsx@2023_1 registry-vpc.cn-shenzhen.aliyuncs.com
-                    docker tag ${image_id} registry-vpc.cn-shenzhen.aliyuncs.com/aliyun-namespace1/aliyun-repo:${artifactId}:\${VERSION_ID}
-                    docker push registry-vpc.cn-shenzhen.aliyuncs.com/aliyun-namespace1/aliyun-repo:${VERSION_ID}
+                    docker tag ${image_id} registry-vpc.cn-shenzhen.aliyuncs.com/aliyun-namespace1/aliyun-repo:\${artifactId}:\${VERSION_ID}
+                    docker push registry-vpc.cn-shenzhen.aliyuncs.com/aliyun-namespace1/aliyun-repo:\${artifactId}:\${VERSION_ID}
                 '
                 """
                         echo '推送远程仓库成功'
@@ -105,7 +105,7 @@ pipeline {
 
 
                     docker login --username=xiaoyuma --password=Alizaq12wsx@2023_1 registry-vpc.cn-shenzhen.aliyuncs.com
-                    docker pull registry-vpc.cn-shenzhen.aliyuncs.com/aliyun-namespace1/aliyun-repo:${artifactId}:\${VERSION_ID}
+                    docker pull registry-vpc.cn-shenzhen.aliyuncs.com/aliyun-namespace1/aliyun-repo:\${artifactId}:\${VERSION_ID}
 
                     container_id=$(docker ps -aq --filter "name=${artifactId}" --filter "status=running")
                     if [[ -n "${container_id}" ]]; then
