@@ -64,7 +64,7 @@ pipeline {
                     def dockPath="/home/konyliu/docker/demo-example"
                     def appName='exampleApp8092'
                     def artifactId='demo-example'
-                    def remoteServer = '120.77.58.33'
+                    def remoteServer = '120.77.58.15'
                     def remoteUser = 'konyliu'
                     def VERSION_ID="1.0.0"
 
