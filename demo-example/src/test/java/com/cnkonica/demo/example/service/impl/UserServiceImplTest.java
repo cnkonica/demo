@@ -62,4 +62,30 @@ class UserServiceImplTest {
         // Verify the results
         assertThat(result).isEqualTo(Collections.emptyList());
     }
+
+    @Test
+    void testSelectByPrimaryKey() {
+        // Setup
+        final OrmUser expectedResult = new OrmUser();
+        expectedResult.setId(0);
+        expectedResult.setName("name");
+        expectedResult.setPassword("password");
+        expectedResult.setSalt("salt");
+        expectedResult.setEmail("email");
+
+        // Configure OrmUserMapper.selectByPrimaryKey(...).
+        final OrmUser ormUser = new OrmUser();
+        ormUser.setId(0);
+        ormUser.setName("name");
+        ormUser.setPassword("password");
+        ormUser.setSalt("salt");
+        ormUser.setEmail("email");
+        when(mockOrmUserMapper.selectByPrimaryKey(0L)).thenReturn(ormUser);
+
+        // Run the test
+        final OrmUser result = userServiceImplUnderTest.selectByPrimaryKey(0L);
+
+        // Verify the results
+        assertThat(result).isEqualTo(expectedResult);
+    }
 }
