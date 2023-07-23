@@ -20,4 +20,9 @@ public class UserServiceImpl implements UserService {
     public OrmUser selectByPrimaryKey(Long id) {
         return ormUserMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int deleteByPrimaryKey(Long id) {
+         return ormUserMapper.deleteByPrimaryKey(id);
+    }
 }

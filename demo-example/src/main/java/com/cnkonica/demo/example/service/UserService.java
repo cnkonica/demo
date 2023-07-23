@@ -8,4 +8,6 @@ public interface UserService {
     List<OrmUser> getAllUser();
 
     public OrmUser selectByPrimaryKey(Long id);
+
+    public int deleteByPrimaryKey(Long id);
 }
