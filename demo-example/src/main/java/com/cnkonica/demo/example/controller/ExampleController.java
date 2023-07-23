@@ -35,4 +35,12 @@ public class ExampleController {
         int i = 1/0;
         return Results.success();
     }
+    @GetMapping("selectByPrimaryKey")
+    public GlobalResponse<OrmUser> selectByPrimaryKey(long id){
+        log.info("this is error");
+        OrmUser ormUser = userService.selectByPrimaryKey(id);
+        return Results.success(ormUser);
+    }
+
+
 }
