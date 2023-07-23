@@ -88,4 +88,14 @@ class UserServiceImplTest {
         // Verify the results
         assertThat(result).isEqualTo(expectedResult);
     }
+
+    @Test
+    void testDeleteByPrimaryKey() {
+        when(mockOrmUserMapper.deleteByPrimaryKey(0L)).thenReturn(0);
+        // Run the test
+        int i = userServiceImplUnderTest.deleteByPrimaryKey(0L);
+
+        // Verify the results
+        assertThat(i).isEqualTo(0);
+    }
 }
