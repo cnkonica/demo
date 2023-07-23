@@ -16,8 +16,4 @@ public class UserServiceImpl implements UserService {
     public List<OrmUser> getAllUser() {
         return ormUserMapper.selectAllUser();
     }
-    @Override
-    public OrmUser selectByPrimaryKey(Long id) {
-        return ormUserMapper.selectByPrimaryKey(id);
-    }
 }
