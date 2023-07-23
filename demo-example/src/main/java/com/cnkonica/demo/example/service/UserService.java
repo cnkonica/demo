@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserService {
     List<OrmUser> getAllUser();
+
+    public OrmUser selectByPrimaryKey(Long id);
 }
