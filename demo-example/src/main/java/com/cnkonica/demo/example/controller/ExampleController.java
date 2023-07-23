@@ -28,4 +28,11 @@ public class ExampleController {
         List<OrmUser> allUser = userService.getAllUser();
         return Results.success(allUser);
     }
+
+    @GetMapping("error")
+    public GlobalResponse<String> error(){
+        log.info("this is error");
+        int i = 1/0;
+        return Results.success();
+    }
 }
