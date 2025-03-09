@@ -1,13 +1,16 @@
-DROP TABLE IF EXISTS `orm_user`;
-CREATE TABLE `orm_user` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '主键',
-  `name` VARCHAR(32) NOT NULL UNIQUE COMMENT '用户名',
-  `password` VARCHAR(32) DEFAULT NULL COMMENT '加密后的密码',
-  `salt` VARCHAR(32) DEFAULT NULL COMMENT '加密使用的盐',
-  `email` VARCHAR(32) DEFAULT NULL UNIQUE COMMENT '邮箱',
-  `phone_number` VARCHAR(15) DEFAULT NULL UNIQUE COMMENT '手机号码',
-  `status` INT(2)  DEFAULT NULL COMMENT '状态，-1：逻辑删除，0：禁用，1：启用',
-  `create_time` DATETIME DEFAULT NULL DEFAULT NOW() COMMENT '创建时间',
-  `last_login_time` DATETIME DEFAULT NULL COMMENT '上次登录时间',
-  `last_update_time` DATETIME DEFAULT NULL DEFAULT NOW() COMMENT '上次更新时间'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Spring Boot Demo Orm 系列示例表';
+DROP TABLE IF EXISTS orm_user;
+
+CREATE TABLE orm_user (
+                          id SERIAL PRIMARY KEY, -- Auto-increment in PostgreSQL
+                          name VARCHAR(32) NOT NULL UNIQUE, -- Unique username
+                          password VARCHAR(32), -- Encrypted password
+                          salt VARCHAR(32), -- Encryption salt
+                          email VARCHAR(32) UNIQUE, -- Unique email
+                          phone_number VARCHAR(15) UNIQUE, -- Unique phone number
+                          status SMALLINT DEFAULT NULL, -- Status (-1: Deleted, 0: Disabled, 1: Enabled)
+                          create_time TIMESTAMP DEFAULT NOW(), -- Creation time with default value
+                          last_login_time TIMESTAMP, -- Last login time
+                          last_update_time TIMESTAMP DEFAULT NOW() -- Last update time with default value
+);
+
+
