@@ -1,10 +1,10 @@
 eureka:
-  instance:
-    instance-id: demo-gateway-service
-    prefer-ip-address: true
-    ip-address: 120.77.58.15
-  client: #服务提供者provider注册进eureka服务列表内
-    register-with-eureka: true
-    fetch-registry: true
+  client:
+    register-with-eureka: true  # Register the service with Eureka
+    fetchRegistry: true         # Fetch the registry from Eureka
     service-url:
-      defaultZone: http://120.77.58.15:8090/eureka/
+      defaultZone: http://eureka-service:32011/eureka  # Point to the Eureka service within Kubernetes
+
+  instance:
+    instance-id: gateway-service
+    prefer-ip-address: true  # Use the IP address for accessing the service
