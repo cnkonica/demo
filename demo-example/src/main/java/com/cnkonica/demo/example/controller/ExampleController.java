@@ -42,7 +42,7 @@ public class ExampleController {
     }
     @GetMapping("selectByPrimaryKey")
     public GlobalResponse<OrmUser> selectByPrimaryKey(long id){
-        log.info("this is error");
+        log.info("selectByPrimaryKey");
         OrmUser ormUser = userService.selectByPrimaryKey(id);
         return Results.success(ormUser);
     }
