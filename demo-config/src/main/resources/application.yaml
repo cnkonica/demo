@@ -29,9 +29,9 @@ spring:
           username: wudikaka
           password: liu147741555
           skip-ssl-validation: true
-          proxy:
-            https:
-              host: 127.0.0.1
-              port: 51430
+#          proxy:
+#            https:
+#              host: 127.0.0.1
+#              port: 51430
 
 
