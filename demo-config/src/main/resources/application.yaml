@@ -1,0 +1,37 @@
+server:
+  port: 32014
+
+management:
+  # 端点健康情况，默认值"never"，设置为"always"可以显示硬盘使用情况和线程情况
+  endpoint:
+    health:
+      show-details: always
+  # 设置端点暴露的哪些内容，默认["health","info"]，设置"*"代表暴露所有可访问的端点
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  application:
+    name: config-server-service
+  profiles:
+    active: local
+  cloud:
+    config:
+      server:
+        # 远程git仓库
+        git:
+          uri: https://github.com/cnkonica/config-repo
+
+          search-paths: config  # 配置文件所在根目录
+          default-label: master
+          clone-on-start: true
+          username: cnkonica
+          password: liu147741555
+          skip-ssl-validation: true
+          proxy:
+            https:
+              host: 127.0.0.1
+              port: 51430
+
+

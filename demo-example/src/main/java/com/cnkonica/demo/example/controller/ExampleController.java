@@ -6,6 +6,7 @@ import com.cnkonica.demo.example.domain.OrmUser;
 import com.cnkonica.demo.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,10 @@ import java.util.List;
 public class ExampleController {
     @Autowired
     private UserService userService;
+
+    @Value("${content}")
+    private String content;
+
     @GetMapping("ok")
     public GlobalResponse<String> ok(){
         log.info("this is ok");
@@ -41,6 +46,10 @@ public class ExampleController {
         OrmUser ormUser = userService.selectByPrimaryKey(id);
         return Results.success(ormUser);
     }
-
+    @GetMapping("getGitConfig")
+    public GlobalResponse<String> getGitConfig(){
+        log.info("getGitConfig");
+        return Results.success(content);
+    }
 
 }

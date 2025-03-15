@@ -1,14 +1,3 @@
-eureka:
-  client:
-    register-with-eureka: true  # Register the service with Eureka
-    fetchRegistry: true         # Fetch the registry from Eureka
-    service-url:
-      defaultZone: http://localhost:32011/eureka  # Point to the Eureka service within Kubernetes
-
-  instance:
-    instance-id: example-service
-    prefer-ip-address: true  # Use the IP address for accessing the service
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:30007/demo
@@ -26,3 +15,7 @@ spring:
       pool-name: SpringBootDemoHikariCP
       max-lifetime: 60000
       connection-timeout: 30000
+
+logging:
+  level:
+    org.springframework.cloud.config: DEBUG

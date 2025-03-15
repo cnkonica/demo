@@ -1,0 +1,25 @@
+eureka:
+  client:
+    register-with-eureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:32011/eureka
+  instance:
+    instance-id: example-service
+    prefer-ip-address: true
+
+spring:
+  application:
+    name: example-service
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server-service
+      label: master  # Make sure this matches your Git branch name
+      name: example-service  # Should match your YAML file name in the config repo
+      profile: local
+
+logging:
+  level:
+    org.springframework.cloud.config: DEBUG
