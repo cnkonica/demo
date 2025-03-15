@@ -8,7 +8,7 @@ LABEL maintainer="kony"
 COPY demo-config/target/ConfigApp.jar /ConfigApp.jar
 
 # Expose the application port
-EXPOSE 32011
+EXPOSE 32014
 
 # Set default environment variable (can be overridden)
 ENV SPRING_PROFILES_ACTIVE=local
