@@ -21,12 +21,12 @@ spring:
       server:
         # 远程git仓库
         git:
-          uri: https://github.com/cnkonica/config-repo
+          uri: https://gitee.com/wudikaka/config-repo.git
 
           search-paths: config  # 配置文件所在根目录
           default-label: master
           clone-on-start: true
-          username: cnkonica
+          username: wudikaka
           password: liu147741555
           skip-ssl-validation: true
           proxy:

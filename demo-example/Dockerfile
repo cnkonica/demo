@@ -4,7 +4,7 @@ FROM azul/zulu-openjdk-alpine:11-jre
 # Maintainer
 LABEL maintainer="kony"
 # Copy JAR file
-COPY target/exampleApp8092.jar exampleApp8092.jar
+COPY demo-example/target/exampleApp8092.jar exampleApp8092.jar
 # Expose the application port
 EXPOSE 32013
 # Set default environment variable (can be overridden)

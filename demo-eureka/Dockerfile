@@ -5,7 +5,7 @@ FROM azul/zulu-openjdk-alpine:11-jre
 LABEL maintainer="kony"
 
 # Copy JAR file
-COPY target/eurekaApp8090.jar /eurekaApp8090.jar
+COPY demo-eureka/target/eurekaApp8090.jar /eurekaApp8090.jar
 
 # Expose the application port
 EXPOSE 32011
