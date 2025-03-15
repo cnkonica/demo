@@ -1,0 +1,48 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: gateway-service
+
+---
+spring:
+  profiles: local
+  cloud:
+    config:
+      label: develop  # Make sure this matches your Git branch name
+      name: gateway-service  # Should match your YAML file name in the config repo
+      profile: local
+      discovery:
+        enabled: true
+        service-id: config-server-service
+eureka:
+  client:
+    register-with-eureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:32011/eureka
+  instance:
+    instance-id: gateway-service
+    prefer-ip-address: true
+
+---
+spring:
+  profiles: prod
+  cloud:
+    config:
+      label: master  # Make sure this matches your Git branch name
+      name: gateway-service  # Should match your YAML file name in the config repo
+      profile: prod
+      discovery:
+        enabled: true
+        service-id: config-server-service
+eureka:
+  client:
+    register-with-eureka: true  # Register the service with Eureka
+    fetchRegistry: true         # Fetch the registry from Eureka
+    service-url:
+      defaultZone: http://eureka-service:32011/eureka  # Point to the Eureka service within Kubernetes
+
+  instance:
+    instance-id: gateway-service
+    prefer-ip-address: true  # Use the IP address for accessing the service
