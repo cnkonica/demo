@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-deployment
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: config
+  template:
+    metadata:
+      labels:
+        app: config
+    spec:
+      containers:
+        - name: config-container
+          image: lmq1106/config:v1
+          ports:
+            - containerPort: 32014
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+

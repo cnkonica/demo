@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+        - name: example-container
+          image: lmq1106/example:v1
+          ports:
+            - containerPort: 32013
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-deployment
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: eureka
+  template:
+    metadata:
+      labels:
+        app: eureka
+    spec:
+      containers:
+        - name: eureka-container
+          image: lmq1106/eureka:v1
+          ports:
+            - containerPort: 32011
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+

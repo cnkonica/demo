@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  selector:
+    app: gateway
+  ports:
+    - protocol: TCP
+      port: 32012
+      targetPort: 32012
+      nodePort: 32012
+  type: NodePort  # Change to NodePort if needed
+
