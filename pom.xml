@@ -20,7 +20,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <spring.boot.version>3.4.7</spring.boot.version>
+        <spring.boot.version>3.2.7</spring.boot.version>
         <spring.cloud.version>2024.0.1</spring.cloud.version>
         <mysql.version>8.0.21</mysql.version>
         <hutool.version>5.4.5</hutool.version>

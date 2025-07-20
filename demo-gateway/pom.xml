@@ -58,7 +58,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>com.cnkonica.demo.gateway.Gateway8091</mainClass>
+                    <mainClass>com.cnkonica.demo.gateway.GatewayApp8091</mainClass>
                 </configuration>
                 <executions>
                     <execution>

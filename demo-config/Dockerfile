@@ -5,10 +5,7 @@ FROM azul/zulu-openjdk-alpine:17-jre
 LABEL maintainer="kony"
 
 # Copy JAR file
-COPY demo-config/target/ConfigApp.jar /ConfigApp.jar
-
-# Expose the application port
-EXPOSE 32014
+COPY demo-config/target/ConfigApp8093.jar /ConfigApp.jar
 
 # Set default environment variable (can be overridden)
 ENV SPRING_PROFILES_ACTIVE=local
