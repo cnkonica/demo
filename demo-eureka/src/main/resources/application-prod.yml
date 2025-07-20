@@ -6,7 +6,7 @@ eureka:
     register-with-eureka: false  # Eureka server doesn't register itself with other Eureka servers
     fetch-registry: false        # Eureka server doesn't need to fetch registry from other servers
     service-url:
-      defaultZone: http://eureka-service:32011/eureka
+      defaultZone: http://eureka-service/discovery-server/eureka/
 
 # Optionally, you can include health checks if you plan to manage Eureka's health status
 management:

@@ -1,5 +1,6 @@
 server:
-  port: 32011
+  servlet:
+    context-path: /discovery-server/
 spring:
   profiles:
     active: local

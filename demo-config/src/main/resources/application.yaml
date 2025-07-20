@@ -1,6 +1,3 @@
-server:
-  port: 32014
-
 management:
   # 端点健康情况，默认值"never"，设置为"always"可以显示硬盘使用情况和线程情况
   endpoint:

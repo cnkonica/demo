@@ -1,4 +1,6 @@
 # Eureka server configuration in Kubernetes
+server:
+  port: 8090
 eureka:
   instance:
     hostname: eureka-service  # Use the Kubernetes service name for Eureka server
@@ -6,7 +8,7 @@ eureka:
     register-with-eureka: false  # Eureka server doesn't register itself with other Eureka servers
     fetch-registry: false        # Eureka server doesn't need to fetch registry from other servers
     service-url:
-      defaultZone: http://localhost:32011/eureka
+      defaultZone: http://localhost:8090/discovery-server/eureka/
 
 # Optionally, you can include health checks if you plan to manage Eureka's health status
 management:
