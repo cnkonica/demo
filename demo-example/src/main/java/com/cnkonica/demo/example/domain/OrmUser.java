@@ -1,5 +1,13 @@
 package com.cnkonica.demo.example.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,55 +15,71 @@ import java.util.Date;
  * Spring Boot Demo Orm 系列示例表
  * @TableName orm_user
  */
+@Entity
+@Table(name = "orm_user")
 public class OrmUser implements Serializable {
     /**
      * 主键
      */
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     /**
      * 用户名
      */
+    @Column(name = "name")
     private String name;
 
     /**
      * 加密后的密码
      */
+    @Column(name = "password")
     private String password;
 
     /**
      * 加密使用的盐
      */
+    @Column(name = "salt")
     private String salt;
 
     /**
      * 邮箱
      */
+    @Column(name = "email")
     private String email;
 
     /**
      * 手机号码
      */
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     /**
      * 状态，-1：逻辑删除，0：禁用，1：启用
      */
+    @Column(name = "status")
     private Integer status;
 
     /**
      * 创建时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_time")
     private Date createTime;
 
     /**
      * 上次登录时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_login_time")
     private Date lastLoginTime;
 
     /**
      * 上次更新时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_update_time")
     private Date lastUpdateTime;
 
     private static final long serialVersionUID = 1L;
@@ -63,14 +87,14 @@ public class OrmUser implements Serializable {
     /**
      * 主键
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * 主键
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,7 +1,7 @@
 package com.cnkonica.demo.example.service.impl;
 
 import com.cnkonica.demo.example.domain.OrmUser;
-import com.cnkonica.demo.example.mapper.OrmUserMapper;
+import com.cnkonica.demo.example.repository.OrmUserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.when;
 class UserServiceImplTest {
 
     @Mock
-    private OrmUserMapper mockOrmUserMapper;
+    private OrmUserRepository mockOrmUserRepository;
 
     @InjectMocks
     private UserServiceImpl userServiceImplUnderTest;
@@ -27,22 +28,22 @@ class UserServiceImplTest {
     void testGetAllUser() {
         // Setup
         final OrmUser ormUser = new OrmUser();
-        ormUser.setId(0);
+        ormUser.setId(0L);
         ormUser.setName("name");
         ormUser.setPassword("password");
         ormUser.setSalt("salt");
         ormUser.setEmail("email");
         final List<OrmUser> expectedResult = List.of(ormUser);
 
-        // Configure OrmUserMapper.selectAllUser(...).
+        // Configure OrmUserRepository.findAll(...).
         final OrmUser ormUser1 = new OrmUser();
-        ormUser1.setId(0);
+        ormUser1.setId(0L);
         ormUser1.setName("name");
         ormUser1.setPassword("password");
         ormUser1.setSalt("salt");
         ormUser1.setEmail("email");
         final List<OrmUser> ormUsers = List.of(ormUser1);
-        when(mockOrmUserMapper.selectAllUser()).thenReturn(ormUsers);
+        when(mockOrmUserRepository.findAll()).thenReturn(ormUsers);
 
         // Run the test
         final List<OrmUser> result = userServiceImplUnderTest.getAllUser();
@@ -54,7 +55,7 @@ class UserServiceImplTest {
     @Test
     void testGetAllUser_OrmUserMapperReturnsNoItems() {
         // Setup
-        when(mockOrmUserMapper.selectAllUser()).thenReturn(Collections.emptyList());
+        when(mockOrmUserRepository.findAll()).thenReturn(Collections.emptyList());
 
         // Run the test
         final List<OrmUser> result = userServiceImplUnderTest.getAllUser();
@@ -67,20 +68,20 @@ class UserServiceImplTest {
     void testSelectByPrimaryKey() {
         // Setup
         final OrmUser expectedResult = new OrmUser();
-        expectedResult.setId(0);
+        expectedResult.setId(0L);
         expectedResult.setName("name");
         expectedResult.setPassword("password");
         expectedResult.setSalt("salt");
         expectedResult.setEmail("email");
 
-        // Configure OrmUserMapper.selectByPrimaryKey(...).
+        // Configure OrmUserRepository.findById(...).
         final OrmUser ormUser = new OrmUser();
-        ormUser.setId(0);
+        ormUser.setId(0L);
         ormUser.setName("name");
         ormUser.setPassword("password");
         ormUser.setSalt("salt");
         ormUser.setEmail("email");
-        when(mockOrmUserMapper.selectByPrimaryKey(0L)).thenReturn(ormUser);
+        when(mockOrmUserRepository.findById(0L)).thenReturn(Optional.of(ormUser));
 
         // Run the test
         final OrmUser result = userServiceImplUnderTest.selectByPrimaryKey(0L);
@@ -91,7 +92,7 @@ class UserServiceImplTest {
 
     @Test
     void testDeleteByPrimaryKey() {
-        when(mockOrmUserMapper.deleteByPrimaryKey(0L)).thenReturn(0);
+        when(mockOrmUserRepository.existsById(0L)).thenReturn(true);
         // Run the test
         int i = userServiceImplUnderTest.deleteByPrimaryKey(0L);
 

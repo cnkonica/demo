@@ -7,7 +7,11 @@ import java.util.List;
 public interface UserService {
     List<OrmUser> getAllUser();
 
-    public OrmUser selectByPrimaryKey(Long id);
+    OrmUser selectByPrimaryKey(Long id);
 
-    public int deleteByPrimaryKey(Long id);
+    OrmUser create(OrmUser user);
+
+    OrmUser update(Long id, OrmUser user);
+
+    int deleteByPrimaryKey(Long id);
 }

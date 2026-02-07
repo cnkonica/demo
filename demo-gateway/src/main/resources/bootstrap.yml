@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    active: local
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: "optional:configserver:"
+  cloud:
+    config:
+      label: develop
+      name: gateway-service
+      profile: local
+      discovery:
+        enabled: true
+        service-id: config-server-service
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8090/discovery-server/eureka/
+  instance:
+    instance-id: gateway-service
+    prefer-ip-address: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+    import: "optional:configserver:"
+  cloud:
+    config:
+      label: master
+      name: gateway-service
+      profile: prod
+      discovery:
+        enabled: true
+        service-id: config-server-service
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-service/discovery-server/eureka/
+  instance:
+    instance-id: gateway-service
+    prefer-ip-address: true
