@@ -1,5 +1,5 @@
 # Base image
-FROM azul/zulu-openjdk-alpine:17-jre
+FROM azul/zulu-openjdk-alpine:21-jre
 
 # Maintainer
 LABEL maintainer="kony"

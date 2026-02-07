@@ -17,16 +17,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <spring.boot.version>3.2.7</spring.boot.version>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <spring.boot.version>3.4.2</spring.boot.version>
         <spring.cloud.version>2024.0.1</spring.cloud.version>
-        <mysql.version>8.0.21</mysql.version>
-        <hutool.version>5.4.5</hutool.version>
-        <guava.version>29.0-jre</guava.version>
+        <mysql.version>9.1.0</mysql.version>
+        <hutool.version>5.8.34</hutool.version>
+        <guava.version>33.4.0-jre</guava.version>
         <user.agent.version>1.20</user.agent.version>
-        <mybatis.version>1.3.2</mybatis.version>
+        <mybatis.version>3.0.4</mybatis.version>
     </properties>
 
 
@@ -47,8 +47,8 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
             <!-- guava工具类 -->
@@ -71,7 +71,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>3.5.2</version>
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
@@ -79,7 +79,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.4</version>
+                <version>0.8.12</version>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>
